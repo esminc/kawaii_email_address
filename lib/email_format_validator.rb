@@ -11,8 +11,14 @@ module EmailFormatValidator
 
     attr_reader :local_part, :domain_part
 
+    class << self
+      attr_accessor :period_restriction_violate_domains
+    end
+
+    self.period_restriction_violate_domains = %w[docomo.ne.jp ezweb.ne.jp]
+
     def initialize(address)
-      @@domain_part, @local_part = address.reverse.split('@', 2).map(&:reverse)
+      @domain_part, @local_part = address.reverse.split('@', 2).map(&:reverse)
     end
 
     def valid?
@@ -20,10 +26,12 @@ module EmailFormatValidator
     end
 
     def to_s
-      [@local_part, @domain_part].join('@')
+      [local_part, domain_part].join('@')
     end
 
     def valid_local_part?
+      return false if invalid_period_position?
+
       in_quoted_pair    = false
       in_quoted_string  = false
 
@@ -47,9 +55,9 @@ module EmailFormatValidator
           next true
 
         when PERIOD
-          (0 < i) && \
-          (i < local_part.length - 1) && \
-          (in_quoted_string || local_part[i + 1] != PERIOD) # can't be followed by a period
+          period_restriction_violate_domain? ||
+          in_quoted_string ||
+          local_part[i + 1] != PERIOD
 
         else
           LocalPartChars.include?(char) || \
@@ -59,6 +67,18 @@ module EmailFormatValidator
       end
 
       is_valid && !in_quoted_string
+    end
+
+    private
+
+    def period_restriction_violate_domain?
+      self.class.period_restriction_violate_domains.include?(domain_part)
+    end
+
+    def invalid_period_position?
+      return false if period_restriction_violate_domain?
+
+      local_part.start_with?(PERIOD) || local_part.end_with?(PERIOD)
     end
   end
 end
