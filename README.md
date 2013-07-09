@@ -22,7 +22,6 @@ It's NOT Rails' validator. Use it with this
 
 ```
 KawaiiEmailAddress::Validator.new(email_address_string).valid?
-
 ```
 
 ## Contributing
