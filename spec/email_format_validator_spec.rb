@@ -83,4 +83,14 @@ describe EmailFormatValidator::Address do
     let(:addr) { 'example@ne.co.j2' }
     xit { should_not be_valid }
   end
+
+  context 'domain part is valid domain literal' do
+    let(:addr) { 'example@[115.146.17.185]' }
+    xit { should be_valid }
+  end
+
+  context 'domain part is invalid domain literal' do
+    let(:addr) { 'example@[115.146.1722]' }
+    xit { should_not be_valid }
+  end
 end
