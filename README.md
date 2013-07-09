@@ -1,6 +1,6 @@
 # KawaiiEmailAddress
 
-Extraction of validate logic from `validates_email_format_of` to support japanese docomo/au addresses.
+Extraction of validate logic from `validates_email_format_of` to support japanese docomo/au kawaii addresses.
 
 ## Installation
 
