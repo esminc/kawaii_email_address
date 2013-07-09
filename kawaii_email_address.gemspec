@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'email_format_validator/version'
+require 'kawaii_email_address/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "kawaii_email_address"
