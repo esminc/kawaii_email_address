@@ -1,4 +1,5 @@
-require "email_format_validator/version"
+require 'email_format_validator/version'
+require 'ipaddress'
 
 module EmailFormatValidator
   class Address
