@@ -1,4 +1,4 @@
-Copyright (c) 2013 moro
+Copyright (c) 2013 Tagaki Aki
 
 MIT License
 

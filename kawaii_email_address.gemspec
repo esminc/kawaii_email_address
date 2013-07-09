@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'email_format_validator/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "email_format_validator"
-  spec.version       = EmailFormatValidator::VERSION
+  spec.name          = "kawaii_email_address"
+  spec.version       = KawaiiEmailAddress::VERSION
   spec.authors       = ["moro"]
   spec.email         = ["moronatural@gmail.com"]
   spec.description   = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}

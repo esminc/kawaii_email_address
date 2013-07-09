@@ -1,4 +1,4 @@
-# EmailFormatValidator
+# KawaiiEmailAddress
 
 Extraction of validate logic from `validates_email_format_of` to support japanese docomo/au addresses.
 
@@ -6,7 +6,7 @@ Extraction of validate logic from `validates_email_format_of` to support japanes
 
 Add this line to your application's Gemfile:
 
-    gem 'email_format_validator'
+    gem 'kawaii_email_address'
 
 And then execute:
 
@@ -14,14 +14,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install email_format_validator
+    $ gem install kawaii_email_address
 
 ## Usage
 
 It's NOT Rails' validator. Use it with this
 
 ```
-EmailFormatValidator::Adress.new(email_address_string).valid?
+KawaiiEmailAddress::Validator.new(email_address_string).valid?
 
 ```
 

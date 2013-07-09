@@ -1,8 +1,8 @@
-require 'email_format_validator/address'
+require 'kawaii_email_address/validator'
 
-describe EmailFormatValidator::Address do
+describe KawaiiEmailAddress::Validator do
 
-  subject(:address) { EmailFormatValidator::Address.new(addr) }
+  subject(:address) { KawaiiEmailAddress::Validator.new(addr) }
 
   context 'when a@example.com' do
     let(:addr) { 'a@example.com' }

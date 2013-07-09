@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in email_format_validator.gemspec
+# Specify your gem's dependencies in kawaii_email_address.gemspec
 gemspec

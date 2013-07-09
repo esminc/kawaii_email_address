@@ -1,8 +1,8 @@
-require 'email_format_validator/version'
+require 'kawaii_email_address/version'
 require 'ipaddr'
 
-module EmailFormatValidator
-  class Address
+module KawaiiEmailAddress
+  class Validator
     LocalPartChars             = ((?A..?Z).to_a + (?a..?z).to_a + (0..9).to_a).join + %q[!#$%&'*-/=?+-^_`{|}~]
     LocalPartQuotedStringChars = %q[()<>[]:;@,.] << ' '
 
