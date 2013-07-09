@@ -83,8 +83,8 @@ module EmailFormatValidator
 
     def valid_domain_literal?(domain)
       begin
-        IPAdress.new(domain)
-      rescue
+        IPAddr.new(domain)
+      rescue IPAddr::InvalidAddressError
         false
       end
     end
