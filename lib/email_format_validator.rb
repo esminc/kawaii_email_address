@@ -1,10 +1,14 @@
 require "email_format_validator/version"
 
-LocalPartSpecialChars      = /[\!\#\$\%\&\'\*\-\/\=\?\+\-\^\_\`\{\|\}\~]/
-LocalPartQuotedStringChars = /[\(\)\<\>\[\]\:\;\@\,\.\ ]/
-
 module EmailFormatValidator
   class Address
+    LocalPartChars             = ((?A..?Z).to_a + (?a..?z).to_a + (0..9).to_a).join + %q[!#$%&'*-/=?+-^_`{|}~]
+    LocalPartQuotedStringChars = %q[()<>[]:;@,.] << ' '
+
+    PERIOD =        '.'
+    BACKSLASH =     '\\'
+    DOUBLE_QUOTE =  '"'
+
     attr_reader :local_part, :domain_part
 
     def initialize(address)
@@ -23,51 +27,38 @@ module EmailFormatValidator
       in_quoted_pair    = false
       in_quoted_string  = false
 
-      (0..local_part.length - 1).each do |i|
-        ord = local_part[i].ord
-
+      is_valid = local_part.chars.each.with_index.all? do |char, i|
         # accept anything if it's got a backslash before it
         if in_quoted_pair
           in_quoted_pair = false
-          next
+          next true
         end
 
-        # backslash signifies the start of a quoted pair
-        if ord == 92 and i < local_part.length - 1
-          return false if not in_quoted_string # must be in quoted string per http://www.rfc-editor.org/errata_search.php?rfc=3696
-          in_quoted_pair = true
-          next
-        end
-
-        # double quote delimits quoted strings
-        if ord == 34
-          in_quoted_string = !in_quoted_string
-          next
-        end
-
-        next if local_part[i, 1] =~ /[a-z0-9]/i
-        next if local_part[i, 1] =~ LocalPartSpecialChars
-
-        if in_quoted_string
-          next if local_part[i, 1] =~ LocalPartQuotedStringChars
-
-          if in_quoted_pair
-            next if local_part[i, 1] == '"'
+        case char
+        when BACKSLASH # backslash signifies the start of a quoted pair
+          # must be in quoted string per http://www.rfc-editor.org/errata_search.php?rfc=3696
+          if (i < local_part.length - 1) && in_quoted_string
+            in_quoted_pair = true
+            next true
           end
+
+        when DOUBLE_QUOTE # double quote delimits quoted strings
+          in_quoted_string = !in_quoted_string
+          next true
+
+        when PERIOD
+          (0 < i) && \
+          (i < local_part.length - 1) && \
+          (in_quoted_string || local_part[i + 1] != PERIOD) # can't be followed by a period
+
+        else
+          LocalPartChars.include?(char) || \
+          (in_quoted_string && LocalPartQuotedStringChars.include?(char))
+
         end
-
-        # period must be followed by something
-        if ord == 46
-          return false if i == 0 or i == local_part.length - 1 # can't be first or last char
-
-          next if in_quoted_string || local_part[i + 1].ord != 46 # can't be followed by a period
-        end
-
-        return false
       end
 
-      return false if in_quoted_string # unbalanced quotes
-      return true
+      is_valid && !in_quoted_string
     end
   end
 end
