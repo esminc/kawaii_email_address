@@ -1,4 +1,4 @@
-require 'email_format_validator'
+require 'email_format_validator/address'
 
 describe EmailFormatValidator::Address do
 
