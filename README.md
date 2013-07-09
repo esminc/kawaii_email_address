@@ -32,3 +32,7 @@ EmailFormatValidator::Adress.new(email_address_string).valid?
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## THANX
+
+This library based on https://github.com/alexdunae/validates_email_format_of
