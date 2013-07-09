@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = EmailFormatValidator::VERSION
   spec.authors       = ["moro"]
   spec.email         = ["moronatural@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}
+  spec.summary       = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
 end
