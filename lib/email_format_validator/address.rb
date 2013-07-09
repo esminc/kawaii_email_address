@@ -12,11 +12,11 @@ module EmailFormatValidator
     attr_reader :local_part, :domain_part
 
     def initialize(address)
-      @@domain_part, @local_part = address.reverse.split('@', 2).map(&:reverse)
+      @domain_part, @local_part = address.reverse.split('@', 2).map(&:reverse)
     end
 
     def valid?
-      valid_local_part?
+      valid_local_part? && valid_domain_part?
     end
 
     def to_s
@@ -59,6 +59,22 @@ module EmailFormatValidator
       end
 
       is_valid && !in_quoted_string
+    end
+
+    def valid_domain_part?
+      parts = domain_part.downcase.split('.', -1)
+
+      return false if parts.length <= 1
+
+      return false if parts.any? do |part|
+        part.nil? || part.empty? || part !~ /\A[[:alnum:]\-]+\z/ || part.start_with?('-') || part.end_with?('-')
+      end
+
+      #return true if parts.length == 4 && parts.all? {|part| part =~ /\A[0-9]+\z/ && part.to_i.between?(0, 255) }
+
+      return false if parts.last.length < 2 || parts.last !~ /[a-z\-]/
+
+      return true
     end
   end
 end

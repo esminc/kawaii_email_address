@@ -40,7 +40,7 @@ describe EmailFormatValidator::Address do
   end
 
   context 'quotes @' do
-    let(:addr) { '"a@a"@a' }
+    let(:addr) { '"a@a"@example.com' }
     it { should be_valid }
   end
 
@@ -59,4 +59,28 @@ describe EmailFormatValidator::Address do
     xit { should be_valid }
   end
 
+  context 'domain part too short' do
+    let(:addr) { 'example@c' }
+    xit { should_not be_valid }
+  end
+
+  context 'domain part start with hyphen' do
+    let(:addr) { 'example@-com.jp' }
+    xit { should_not be_valid }
+  end
+
+  context 'domain part end with hyphen' do
+    let(:addr) { 'example@com.jp-' }
+    xit { should_not be_valid }
+  end
+
+  context 'domain last part too short' do
+    let(:addr) { 'example@com.j' }
+    xit { should_not be_valid }
+  end
+
+  context 'domain last word is number' do
+    let(:addr) { 'example@ne.co.j2' }
+    xit { should_not be_valid }
+  end
 end
