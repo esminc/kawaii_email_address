@@ -1,4 +1,5 @@
-require "email_format_validator/version"
+require 'email_format_validator/version'
+require 'ipaddress'
 
 module EmailFormatValidator
   class Address
@@ -8,15 +9,16 @@ module EmailFormatValidator
     PERIOD =        '.'
     BACKSLASH =     '\\'
     DOUBLE_QUOTE =  '"'
+    DOMAIN_LITERAL_RE = /\A\[(?<ip_addr>.+)\]\z/
 
     attr_reader :local_part, :domain_part
 
     def initialize(address)
-      @@domain_part, @local_part = address.reverse.split('@', 2).map(&:reverse)
+      @domain_part, @local_part = address.reverse.split('@', 2).map(&:reverse)
     end
 
     def valid?
-      valid_local_part?
+      valid_local_part? && valid_domain_part?
     end
 
     def to_s
@@ -59,6 +61,36 @@ module EmailFormatValidator
       end
 
       is_valid && !in_quoted_string
+    end
+
+    def valid_domain_part?
+      if match = DOMAIN_LITERAL_RE.match(domain_part)
+        valid_domain_literal?(match[:ip_addr])
+      else
+        valid_fqdn_domain_part?
+      end
+    end
+
+    def valid_domain_literal?(domain)
+      begin
+        IPAdress.new(domain)
+      rescue
+        false
+      end
+    end
+
+    def valid_fqdn_domain_part?
+      parts = domain_part.downcase.split('.', -1)
+
+      return false if parts.length <= 1
+
+      return false if parts.any? do |part|
+        part.nil? || part.empty? || part !~ /\A[[:alnum:]\-]+\z/ || part.start_with?('-') || part.end_with?('-')
+      end
+
+      return false if parts.last.length < 2 || parts.last !~ /[a-z\-]/
+
+      return true
     end
   end
 end
