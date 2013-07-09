@@ -51,17 +51,17 @@ describe EmailFormatValidator::Address do
 
   context 'has double dots' do
     let(:addr) { 'mail..example@docomo.ne.jp' }
-    xit { should be_valid }
+    it { should be_valid }
   end
 
   context 'dot just before @' do
     let(:addr) { 'example.@docomo.ne.jp' }
-    xit { should be_valid }
+    it { should be_valid }
   end
 
   context 'start with dot' do
     let(:addr) { '.example@docomo.ne.jp' }
-    xit { should be_valid }
+    it { should be_valid }
   end
 
   context 'domain part too short' do
