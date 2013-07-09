@@ -1,6 +1,6 @@
 # EmailFormatValidator
 
-TODO: Write a gem description
+Extraction of validate logic from `validates_email_format_of` to support japanese docomo/au addresses.
 
 ## Installation
 
@@ -18,7 +18,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+It's NOT Rails' validator. Use it with this
+
+```
+EmailFormatValidator::Adress.new(email_address_string).valid?
+
+```
 
 ## Contributing
 

@@ -44,6 +44,11 @@ describe EmailFormatValidator::Address do
     it { should be_valid }
   end
 
+  context 'complex symbols' do
+    let(:addr) { "'or'1'='1'--@example.com" }
+    it { should be_valid }
+  end
+
   context 'has double dots' do
     let(:addr) { 'mail..example@docomo.ne.jp' }
     xit { should be_valid }
