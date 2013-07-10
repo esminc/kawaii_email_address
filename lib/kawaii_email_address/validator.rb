@@ -24,11 +24,15 @@ module KawaiiEmailAddress
     end
 
     def valid?
-      valid_local_part? && valid_domain_part?
+      both_part_present? && valid_local_part? && valid_domain_part?
     end
 
     def to_s
       [local_part, domain_part].join('@')
+    end
+
+    def both_part_present?
+      local_part && domain_part
     end
 
     def valid_local_part?
