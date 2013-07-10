@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["moronatural@gmail.com", "aki.hosecarioka@gmail.com"]
   spec.description   = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}
   spec.summary       = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/esminc/kawaii_email_address"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
