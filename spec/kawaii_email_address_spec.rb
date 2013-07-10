@@ -21,6 +21,8 @@ describe KawaiiEmailAddress::Validator do
   it { should pass_validation_with '"a@a"@example.com' }
   it { should pass_validation_with "'or'1'='1'--@example.com" }
 
+  it { should_not pass_validation_with 'example_address' }
+
   context 'kawaii: aka.docomo' do
     it { should pass_validation_with 'mail..example@docomo.ne.jp' }
     it { should pass_validation_with 'example.@docomo.ne.jp' }
