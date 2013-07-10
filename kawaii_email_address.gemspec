@@ -6,8 +6,8 @@ require 'kawaii_email_address/version'
 Gem::Specification.new do |spec|
   spec.name          = "kawaii_email_address"
   spec.version       = KawaiiEmailAddress::VERSION
-  spec.authors       = ["moro"]
-  spec.email         = ["moronatural@gmail.com"]
+  spec.authors       = ["moro", "akiinyo"]
+  spec.email         = ["moronatural@gmail.com", "aki.hosecarioka@gmail.com"]
   spec.description   = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}
   spec.summary       = %q{Extraction of validate logic from `validates_email_format_of` to support docomo addresses}
   spec.homepage      = ""
