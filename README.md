@@ -21,7 +21,7 @@ Or install it yourself as:
 It's NOT Rails' validator. Use it with this
 
 ```
-# acdept `kawaii` local part with docomo or ezweb.
+# accept `kawaii` local part with docomo or ezweb.
 KawaiiEmailAddress::Validator.new('....-_-....@docomo.ne.jp').valid? # => true
 
 # reject with other domains.
