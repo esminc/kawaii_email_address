@@ -88,7 +88,7 @@ module KawaiiEmailAddress
     def valid_domain_literal?(domain)
       begin
         IPAddr.new(domain)
-      rescue IPAddr::InvalidAddressError
+      rescue ArgumentError
         false
       end
     end
