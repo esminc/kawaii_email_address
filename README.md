@@ -1,5 +1,7 @@
 # KawaiiEmailAddress
 
+[![Build Status](https://travis-ci.org/esminc/kawaii_email_address.png?branch=master)](https://travis-ci.org/esminc/kawaii_email_address)
+
 Extraction of validate logic from `validates_email_format_of` to support japanese docomo/au kawaii addresses.
 
 ## Installation
