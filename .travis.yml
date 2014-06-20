@@ -3,5 +3,7 @@ language: ruby
 rvm:
   - 1.9.3
   - 2.0.0
-
+  - 2.1
+env:
+  - secure: "CoHbf7aGxnYRxUDVoIFKC3F8PnUSqfjXKxH05oQtGc7+RNXpPWXBbDlIp1Ee5SYtsTn8pQ8Ntxszxu330PeKLQnUwDNJAJOn2eo1ZiYkZoWENSP5nSRAuW+nFQLD5CDIcq8Di6gBYXsjqFHDwgJMFsMAqaDWdz9N9bdQglFBHOE="
 script: bundle exec rspec
