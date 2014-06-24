@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'kawaii_email_address/validator'
 
 describe KawaiiEmailAddress::Validator do
