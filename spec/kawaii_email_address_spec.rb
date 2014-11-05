@@ -24,6 +24,8 @@ describe KawaiiEmailAddress::Validator do
 
   it { should_not pass_validation_with 'example_address' }
 
+  it { should_not pass_validation_with '@example.com' }
+
   context 'kawaii: aka.docomo' do
     it { should pass_validation_with 'mail..example@docomo.ne.jp' }
     it { should pass_validation_with 'example.@docomo.ne.jp' }
