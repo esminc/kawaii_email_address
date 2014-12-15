@@ -36,6 +36,7 @@ module KawaiiEmailAddress
     end
 
     def valid_local_part?
+      return false if local_part.empty?
       return false if invalid_period_position?
 
       in_quoted_pair    = false
