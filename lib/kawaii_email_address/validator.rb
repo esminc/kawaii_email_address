@@ -58,8 +58,13 @@ module KawaiiEmailAddress
           end
 
         when DOUBLE_QUOTE # double quote delimits quoted strings
-          in_quoted_string = !in_quoted_string
-          next true
+          if i == 0
+            in_quoted_string = true
+            next true
+          elsif (i == local_part.length - 1) && in_quoted_string
+            in_quoted_string = false
+            next true
+          end
 
         when PERIOD
           period_restriction_violate_domain? ||
