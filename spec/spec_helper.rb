@@ -5,10 +5,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-if ENV['CODECLIMATE_REPO_TOKEN'] && RUBY_VERSION.start_with?('2.1')
-  require 'codeclimate-test-reporter'
-  CodeClimate::TestReporter.start
-end
+require 'simplecov'
+SimpleCov.start
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
