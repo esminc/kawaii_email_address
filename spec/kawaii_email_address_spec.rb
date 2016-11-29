@@ -18,16 +18,19 @@ describe KawaiiEmailAddress::Validator do
   it { should_not pass_validation_with 'a..b@example.com' }
   it { should_not pass_validation_with 'a.@example.com' }
   it { should_not pass_validation_with '.aaa@example.com' }
-  it { should pass_validation_with '"a@a"@example.com' }
-  it { should_not pass_validation_with 'a"b"@example.com' }
-  it { should_not pass_validation_with '"a"b@example.com' }
-  it { should_not pass_validation_with '"a"b"@example.com' }
-  it { should_not pass_validation_with 'abc"defghi"xyz@example.com' }
-  it { should pass_validation_with "'or'1'='1'--@example.com" }
 
   it { should_not pass_validation_with 'example_address' }
 
   it { should_not pass_validation_with '@example.com' }
+
+  describe 'quoted-string case' do
+    it { should pass_validation_with '"a@a"@example.com' }
+    it { should_not pass_validation_with 'a"b"@example.com' }
+    it { should_not pass_validation_with '"a"b@example.com' }
+    it { should_not pass_validation_with '"a"b"@example.com' }
+    it { should_not pass_validation_with 'abc"defghi"xyz@example.com' }
+    it { should pass_validation_with "'or'1'='1'--@example.com" }
+  end
 
   context 'kawaii: aka.docomo' do
     it { should pass_validation_with 'mail..example@docomo.ne.jp' }
