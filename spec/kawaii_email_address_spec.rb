@@ -18,11 +18,11 @@ describe KawaiiEmailAddress::Validator do
   it { should_not pass_validation_with 'a..b@example.com' }
   it { should_not pass_validation_with 'a.@example.com' }
   it { should_not pass_validation_with '.aaa@example.com' }
-
   it { should pass_validation_with '"a@a"@example.com' }
   it { should_not pass_validation_with 'a"b"@example.com' }
   it { should_not pass_validation_with '"a"b@example.com' }
   it { should_not pass_validation_with '"a"b"@example.com' }
+  it { should_not pass_validation_with 'abc"defghi"xyz@example.com' }
   it { should pass_validation_with "'or'1'='1'--@example.com" }
 
   it { should_not pass_validation_with 'example_address' }
